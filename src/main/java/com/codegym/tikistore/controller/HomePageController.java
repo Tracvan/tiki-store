@@ -10,6 +10,6 @@ import java.io.IOException;
 public class HomePageController extends HttpServlet {
     public void doGet(HttpServletRequest request,
                       HttpServletResponse response) throws IOException {
-        response.sendRedirect("landingPage.jsp");
+        response.sendRedirect("signPage.jsp");
     }
 }
