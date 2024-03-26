@@ -1,0 +1,159 @@
+.temp-logo {
+    font-weight: 700;
+}
+
+.navbar {
+    height: 80px;
+    background-color: #555 !important;
+}
+
+.main__child {
+    background-color: #eee;
+    width: 85%;
+    max-width: 1500px;
+}
+
+.form-container {
+    height: 650px;
+    width: 400px;
+    right: 50px;
+}
+
+.form-container form {
+    width: 350px;
+    border-radius: 10px;
+    background-color: #fff;
+    padding: 30px;
+}
+
+.form-container form input {
+    background-color: #eee;
+}
+
+.form-container form h1 {
+    text-align: center;
+    padding-bottom: 10px;
+    font-weight: 700;
+}
+
+.search__input {
+    color: #333 !important;
+    height: 38px;
+    align-self: flex-end;
+}
+
+.search__btn {
+    color: #fff;
+    border-color: #fff;
+}
+
+.search__btn:hover {
+    background-color: #fff;
+    color: #333 !important;
+}
+
+nav * {
+    color: #fff !important;
+}
+
+.dropdown-menu {
+    background-color: #555;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    font-size: 80%;
+}
+
+footer p {
+    margin: 0 !important;
+    padding: 5px 0px !important;
+}
+
+footer .infor-container p:last-child {
+    padding-bottom: 50px !important;
+}
+
+hr {
+    margin: 0;
+    opacity: 1;
+    border-top: 1px solid #555;
+}
+
+#sign-up {
+    transform: translateX(100px);
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+    transition: all 0.35s ease-in-out;
+}
+
+#sign-in {
+    transform: translateX(0px);
+    position: absolute;
+    z-index: 1;
+    opacity: 1;
+    transition: all 0.35s ease-in-out;
+}
+
+#sign-up.active {
+    transform: translateX(0px);
+    z-index: 1;
+    opacity: 1;
+}
+
+#sign-in.active {
+    transform: translateX(100px);
+    z-index: -1;
+    opacity: 0;
+}
+
+button {
+    margin-top: 20px;
+}
+
+.feature-support {
+    height: 350px;
+}
+
+.container-list {
+    display: flex;
+    justify-content: space-around;
+}
+
+.container-list {
+    padding-top: 50px;
+}
+
+ul,
+li {
+    list-style-type: none;
+    text-align: left;
+    margin-bottom: 1px !important;
+    padding-left: 0 !important;
+}
+
+.heading {
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 10px !important;
+}
+
+a {
+    text-decoration: none;
+    color: #fff;
+}
+
+a:hover {
+    color: #888;
+}
+
+[class *="container-list-"] {
+    width: 200px;
+}
+
+.payment-image img {
+    margin: 0 10px 10px 0;
+}
