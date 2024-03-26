@@ -7,7 +7,11 @@ public class Product {
     private String image;
     private String type;
 
-    public Product(String productName, double price, int quantity, String image, String type) {
+    public Product(String productName,
+                   double price,
+                   int quantity,
+                   String image,
+                   String type) {
         this.productName = productName;
         this.price = price;
         this.quantity = quantity;
