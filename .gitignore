@@ -46,3 +46,4 @@ bin/
 .idea/vcs.xml
 .idea/dictionaries
 .idea/inspectionProfiles/Project_Default.xml
+.idea/dataSources.xml
