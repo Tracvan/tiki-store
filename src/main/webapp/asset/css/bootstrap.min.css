@@ -83,3 +83,6 @@ select{
     color: rgb(51,51,51);
     margin-right: 16px;
 }
+.input-group{
+    width: 100%;
+}
