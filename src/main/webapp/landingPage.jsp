@@ -28,12 +28,12 @@
                     <a class="nav-link disabled" aria-disabled="true">Disabled</a>
                 </li>
             </ul>
-            <form class="d-flex" action="/webapp" role="search" method="get">
+            <form class="d-flex" action="/webapp" method="get">
                 <input class="search__input form-control me-2" type="search" hidden
                        aria-label="Search" name="action" value="search">
-                <input class="search__input form-control me-2" type="search" placeholder="Search"
-                       aria-label="Search" name="searchQuery">
-                <button class="btn btn-outline-success" type="submit" value="search">Search</button>
+                <input class="search__input form-control me-2" type="text" placeholder="Search"
+                       name="searchQuery">
+                <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
         </div>
     </div>
@@ -46,13 +46,13 @@
         <div class="row ">
             <div class="catagory col d-flex flex-column">
                 <div class="catagory-item">
-                    <a href="" class="catagory-item-name">
-                        Test
+                    <a href="/webapp?action=create" class="catagory-item-name">
+                        Add Product
                     </a>
                 </div>
 
                 <div class="catagory-item">
-                    <a href="" class="catagory-item-name">
+                    <a href="#" class="catagory-item-name">
                         Test
                     </a>
                 </div>
@@ -84,91 +84,15 @@
                                 <h5 class="card-title">${product.productName}</h5>
                                 <p class="card-text">Price: ${product.price}$</p>
                                 <p class="card-text">Quantity: ${product.quantity}</p>
-                                <a href="#" class="btn btn-primary">Buy Now</a>
-                                <a href="#" class="btn btn-primary">Add To Cart</a>
+                                <a href="/webapp?action=delete&name=${product.productName}"
+                                   class="btn btn-primary">Delete</a>
+                                <a href="/webapp?action=edit&name=${product.productName}"
+                                   class="btn btn-primary">Edit</a>
                             </div>
                         </div>
                     </c:forEach>
                 </div>
             </div>
-            <%--                    <div class="card col-5">--%>
-            <%--                        <img src="https://m.media-amazon.com/images/I/71yGtauB-AL._AC_SL1500_.jpg"--%>
-            <%--                             class="card-img-top" alt="...">--%>
-            <%--                        <div class="card-body">--%>
-            <%--                            <h5 class="card-title">Card title</h5>--%>
-            <%--                            <p class="card-text">Some quick example text to build on the card title and make up--%>
-            <%--                                the--%>
-            <%--                                bulk of--%>
-            <%--                                the card's--%>
-            <%--                                content.</p>--%>
-            <%--                            <a href="#" class="btn btn-primary">Go somewhere</a>--%>
-            <%--                        </div>--%>
-            <%--                    </div>--%>
-
-            <%--                    <div class="card col-5">--%>
-            <%--                        <img src="https://product.hstatic.net/200000601791/product/5_5d17c7eec19b492193fecec066985240_master.jpg"--%>
-            <%--                             class="card-img-top" alt="...">--%>
-            <%--                        <div class="card-body">--%>
-            <%--                            <h5 class="card-title">Card title</h5>--%>
-            <%--                            <p class="card-text">Some quick example text to build on the card title and make up--%>
-            <%--                                the--%>
-            <%--                                bulk of--%>
-            <%--                                the card's--%>
-            <%--                                content.</p>--%>
-            <%--                            <a href="#" class="btn btn-primary">Go somewhere</a>--%>
-            <%--                        </div>--%>
-            <%--                    </div>--%>
-
-            <%--                    <div class="card col-5">--%>
-            <%--                        <img src="..." class="card-img-top" alt="...">--%>
-            <%--                        <div class="card-body">--%>
-            <%--                            <h5 class="card-title">Card title</h5>--%>
-            <%--                            <p class="card-text">Some quick example text to build on the card title and make up--%>
-            <%--                                the--%>
-            <%--                                bulk of--%>
-            <%--                                the card's--%>
-            <%--                                content.</p>--%>
-            <%--                            <a href="#" class="btn btn-primary">Go somewhere</a>--%>
-            <%--                        </div>--%>
-            <%--                    </div>--%>
-
-            <%--                    <div class="card col-5">--%>
-            <%--                        <img src="..." class="card-img-top" alt="...">--%>
-            <%--                        <div class="card-body">--%>
-            <%--                            <h5 class="card-title">Card title</h5>--%>
-            <%--                            <p class="card-text">Some quick example text to build on the card title and make up--%>
-            <%--                                the--%>
-            <%--                                bulk of--%>
-            <%--                                the card's--%>
-            <%--                                content.</p>--%>
-            <%--                            <a href="#" class="btn btn-primary">Go somewhere</a>--%>
-            <%--                        </div>--%>
-            <%--                    </div>--%>
-
-            <%--                    <div class="card col-5">--%>
-            <%--                        <img src="..." class="card-img-top" alt="...">--%>
-            <%--                        <div class="card-body">--%>
-            <%--                            <h5 class="card-title">Card title</h5>--%>
-            <%--                            <p class="card-text">Some quick example text to build on the card title and make up--%>
-            <%--                                the--%>
-            <%--                                bulk of--%>
-            <%--                                the card's--%>
-            <%--                                content.</p>--%>
-            <%--                            <a href="#" class="btn btn-primary">Go somewhere</a>--%>
-            <%--                        </div>--%>
-            <%--                    </div>--%>
-
-            <%--                    <div class="card col-5">--%>
-            <%--                        <img src="..." class="card-img-top" alt="...">--%>
-            <%--                        <div class="card-body">--%>
-            <%--                            <h5 class="card-title">Card title</h5>--%>
-            <%--                            <p class="card-text">Some quick example text to build on the card title and make up--%>
-            <%--                                the--%>
-            <%--                                bulk of--%>
-            <%--                                the card's--%>
-            <%--                                content.</p>--%>
-            <%--                            <a href="#" class="btn btn-primary">Go somewhere</a>--%>
-            <%--                        </div>--%>
         </div>
     </div>
 </main>
