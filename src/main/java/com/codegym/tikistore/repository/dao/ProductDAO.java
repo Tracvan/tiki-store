@@ -9,15 +9,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductDAO implements IProductDAO {
-    private static final String INSERT_PRODUCT = "Insert into product (productName, productPrice, productQuantity,productType, productImage) values (?, ?, ?, ?, ?)";
+    private static final String INSERT_PRODUCT = "Insert into product (name, price, quantity,type, image) values (?, ?, ?, ?, ?)";
 
     private static final String SELECT_PRODUCT_BY_ID = "select productID, productName, productPrice, productQuantity, " +
             "productType, productImage  from product where id =?";
     private static final String SELECT_ALL_PRODUCT = "select * from product";
-    private static final String DELETE_PRODUCT_SQL = "delete from product where id = ?;";
-    private static final String UPDATE_PRODUCT_SQL = "update users set productName = ?,productPrice= ?, productQuantity =?, productType=?, productImage=?" +
-            " where id = ?;";
-    private static final String SEARCH_PRODUCT = "select name, price, quantity, type, image from product where name like ?; ";
+    private static final String DELETE_PRODUCT_SQL = "delete from product where name = ?;";
+    private static final String UPDATE_PRODUCT_SQL = "update product set name = ?,price= ?, quantity =?, type=?, image=?" +
+            " where name = ?;";
+    private static final String SEARCH_PRODUCT = "select name, price, quantity, type, image from product where name LIKE ?; ";
 
     public ProductDAO() {
 
@@ -54,8 +54,25 @@ public class ProductDAO implements IProductDAO {
     }
 
     @Override
-    public Product selectProduct(int id) throws SQLException {
-        return null;
+    public Product selectProduct(String name) throws SQLException {
+        Product product = null;
+        try {
+            Connection connection = getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT * from product where name=?");
+            statement.setString(1, name);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                String proName = rs.getString("name");
+                double price = rs.getDouble("price");
+                int quantity = rs.getInt("quantity");
+                String type = rs.getString("type");
+                String image = rs.getString("image");
+                product = new Product(proName, price, quantity, type, image);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return product;
     }
 
     @Override
@@ -77,30 +94,27 @@ public class ProductDAO implements IProductDAO {
     }
 
     @Override
-    public boolean deleteProduct(int id) throws SQLException {
-        boolean rowDeleted;
-        try (Connection connection = getConnection();
-             PreparedStatement statement = connection.prepareStatement(DELETE_PRODUCT_SQL)) {
-            statement.setInt(1, id);
-            rowDeleted = statement.executeUpdate() > 0;
-        }
-        return rowDeleted;
+    public void deleteProduct(String name) throws SQLException {
+
+        Connection connection = getConnection();
+        PreparedStatement statement = connection.prepareStatement(DELETE_PRODUCT_SQL);
+        statement.setString(1, name);
+        statement.executeUpdate();
     }
 
     @Override
-    public boolean updateProduct(Product Product) throws SQLException {
-        boolean rowUpdate;
+    public void updateProduct(Product product) throws SQLException {
+
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(UPDATE_PRODUCT_SQL)) {
-            statement.setString(1, Product.getProductName());
-            statement.setDouble(2, Product.getPrice());
-            statement.setInt(3, Product.getQuantity());
-            statement.setString(4, Product.getType());
-            statement.setString(5, Product.getImage());
-
-            rowUpdate = statement.executeUpdate() > 0;
+            statement.setString(1, product.getProductName());
+            statement.setDouble(2, product.getPrice());
+            statement.setInt(3, product.getQuantity());
+            statement.setString(4, product.getType());
+            statement.setString(5, product.getImage());
+            statement.setString(6, product.getProductName());
+            statement.executeUpdate();
         }
-        return rowUpdate;
     }
 
     @Override
@@ -123,5 +137,6 @@ public class ProductDAO implements IProductDAO {
         }
         return productList;
     }
+
 }
 
