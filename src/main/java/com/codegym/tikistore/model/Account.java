@@ -1,20 +1,35 @@
 package com.codegym.tikistore.model;
 
-import java.util.Date;
-
 public class Account {
     private String email;
     private String password;
-    private Date birth;
+    private String birth;
     private String address;
-    private boolean role;
+    private String role;
     private double wallet;
 
     private String gender;
 
-    public Account(String email, String password) {
+    public Account(String email,
+                   String password) {
         this.email = email;
         this.password = password;
+    }
+
+    public Account(String email,
+                   String password,
+                   String birth,
+                   String address,
+                   String role,
+                   double wallet,
+                   String gender) {
+        this.email = email;
+        this.password = password;
+        this.birth = birth;
+        this.address = address;
+        this.role = role;
+        this.wallet = wallet;
+        this.gender = gender;
     }
 
     public String getGender() {
@@ -37,11 +52,11 @@ public class Account {
         this.password = password;
     }
 
-    public Date getBirth() {
+    public String getBirth() {
         return birth;
     }
 
-    public void setBirth(Date birth) {
+    public void setBirth(String birth) {
         this.birth = birth;
     }
 
@@ -53,11 +68,11 @@ public class Account {
         this.address = address;
     }
 
-    public boolean isRole() {
+    public String getRole() {
         return role;
     }
 
-    public void setRole(boolean role) {
+    public void setRole(String role) {
         this.role = role;
     }
 

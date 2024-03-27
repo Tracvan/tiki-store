@@ -173,42 +173,50 @@
 <jsp:include page="./temp-decoration/header.jsp"></jsp:include>
 
 <div class="container edit-form">
-    <h1 class="mb-5 text-center">Your information:</h1>
-    <div class="mb-3">
-        <label for="formGroupExampleInput" class="form-label">Email</label>
-        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="${}" readonly>
-    </div>
-    <div class="mb-3">
-        <label class="form-label">Birth</label>
-        <div class="row">
-            <input type="text" class="form-control col-1" placeholder="Day">
-            <input type="text" class="form-control col-1" placeholder="Month">
-            <input type="text" class="form-control col-1" placeholder="Year">
+    <form action="/updateacc" method="post">
+        <h1 class="mb-5 text-center">Your information:</h1>
+        <div class="mb-3">
+            <label for="formGroupExampleInput" class="form-label">Email</label>
+            <input type="text" class="form-control" id="formGroupExampleInput" value="${account.email}"
+                   readonly name="name">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Birth</label>
+            <div class="row">
+                <input type="text" class="form-control col-1" value="${account.birth.split("-")[2]}" name="date">
+                <input type="text" class="form-control col-1" value="${account.birth.split("-")[1]}" name="month">
+                <input type="text" class="form-control col-1" value="${account.birth.split("-")[0]}" name="year">
+            </div>
+
         </div>
 
-    </div>
+        <div class="mb-3">
+            <label for="formGroupExampleInput3" class="form-label">Address</label>
+            <input type="text" class="form-control" id="formGroupExampleInput3" value="${account.address}"
+                   name="address">
+        </div>
 
-    <div class="mb-3">
-        <label for="formGroupExampleInput3" class="form-label">Address</label>
-        <input type="text" class="form-control" id="formGroupExampleInput3" placeholder="Address">
-    </div>
+        <div class="mb-3">
+            <label for="formGroupExampleInput3" class="form-label">Role</label>
+            <input type="text" class="form-control" id="formGroupExampleInput4" value="${account.role}" readonly
+                   name="role">
+        </div>
 
-    <div class="mb-3">
-        <label for="formGroupExampleInput3" class="form-label">Role</label>
-        <input type="text" class="form-control" id="formGroupExampleInput4" placeholder="Role">
-    </div>
+        <div class="mb-3">
+            <label for="formGroupExampleInput3" class="form-label">Wallet</label>
+            <input type="text" class="form-control" id="formGroupExampleInput6" value="${account.wallet}" readonly
+                   name="wallet">
+            <label for="formGroupExampleInput3" class="form-label mt-3">Add to Wallet</label>
+            <input type="text" class="form-control" id="formGroupExampleInput5" placeholder="$" name="addWallet"
+                   required>
+        </div>
 
-    <div class="mb-3">
-        <label for="formGroupExampleInput3" class="form-label">Wallet</label>
-        <input type="text" class="form-control" id="formGroupExampleInput6" placeholder="Wallet" readonly>
-        <label for="formGroupExampleInput3" class="form-label mt-3">Add to Wallet</label>
-        <input type="text" class="form-control" id="formGroupExampleInput5" placeholder="Type">
-    </div>
-
-    <div class="btn__container d-flex justify-content-center mt-3">
-        <button type="submit" class="btn btn-primary">Sign in</button>
-    </div>
+        <div class="btn__container d-flex justify-content-center mt-3">
+            <button type="submit" class="btn btn-primary">Change</button>
+        </div>
+    </form>
 </div>
+
 
 <jsp:include page="./temp-decoration/footer.jsp"></jsp:include>
 
