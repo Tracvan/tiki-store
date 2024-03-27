@@ -131,6 +131,10 @@
                     <option value="fr">France</option>
                 </select>
             </div>
+            <div class="form-control">
+                <label class="input-label">Wallet</label>
+                <input type="text" value="wallet">
+            </div>
             <button class="submit" type="submit">Save changed</button>
         </form>
     </div>
