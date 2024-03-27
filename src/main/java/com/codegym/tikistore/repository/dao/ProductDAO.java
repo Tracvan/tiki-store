@@ -2,6 +2,8 @@ package com.codegym.tikistore.repository.dao;
 
 import com.codegym.tikistore.model.Product;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -102,11 +104,12 @@ public class ProductDAO implements IProductDAO {
     }
 
     @Override
-    public List<Product> searchProduct(String searchRequest) throws SQLException {
+    public List<Product> searchProduct(HttpServletRequest request, HttpServletResponse response) throws SQLException {
         List<Product> productList = new ArrayList<>();
+        String searchQuery = (String) request.getAttribute("searchQuery");
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(SEARCH_PRODUCT)) {
-            statement.setString(1, searchRequest);
+            statement.setString(1, searchQuery);
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                 String productName = rs.getString("name");
@@ -120,7 +123,5 @@ public class ProductDAO implements IProductDAO {
         }
         return productList;
     }
-
-
 }
 

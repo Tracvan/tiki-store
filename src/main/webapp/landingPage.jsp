@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Bap
-  Date: 3/26/2024
-  Time: 1:48 PM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
@@ -26,10 +19,10 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    <a class="nav-link active" aria-current="page" href="/homepage-controller">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
+                    <a class="nav-link" href="/webapp">Product List</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
@@ -49,10 +42,12 @@
                     <a class="nav-link disabled" aria-disabled="true">Disabled</a>
                 </li>
             </ul>
-            <form class="d-flex" role="search" method="post">
+            <form class="d-flex" action="/webapp" role="search" method="get">
+                <input class="search__input form-control me-2" type="search" hidden
+                       aria-label="Search" name="action" value="search">
                 <input class="search__input form-control me-2" type="search" placeholder="Search"
                        aria-label="Search" name="searchQuery">
-                <button class="btn btn-outline-success" type="submit">Search</button>
+                <button class="btn btn-outline-success" type="submit" value="search">Search</button>
             </form>
         </div>
     </div>
@@ -101,8 +96,8 @@
                             <img src="${product.image}" class="card-img-top" alt="...">
                             <div class="card-body">
                                 <h5 class="card-title">${product.productName}</h5>
-                                <p class="card-text">${product.price}</p>
-                                <p class="card-text">${product.quantity}</p>
+                                <p class="card-text">Price: ${product.price}$</p>
+                                <p class="card-text">Quantity: ${product.quantity}</p>
                                 <a href="#" class="btn btn-primary">Buy Now</a>
                                 <a href="#" class="btn btn-primary">Add To Cart</a>
                             </div>
