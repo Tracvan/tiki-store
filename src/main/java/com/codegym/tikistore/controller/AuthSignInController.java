@@ -1,5 +1,7 @@
 package com.codegym.tikistore.controller;
 
+import com.codegym.tikistore.model.Account;
+import com.codegym.tikistore.repository.accountDAO.AccountRepo;
 import com.codegym.tikistore.service.account.AccountService;
 
 import javax.servlet.RequestDispatcher;
@@ -8,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebServlet(name = "authsignincontroller", urlPatterns = "/authin")
@@ -16,7 +19,8 @@ public class AuthSignInController extends HttpServlet {
 
     public void doGet(HttpServletRequest request,
                       HttpServletResponse response) throws IOException, ServletException {
-
+        request.getRequestDispatcher("/signPage.jsp").forward(request,
+                response);
     }
 
     @Override
@@ -36,7 +40,8 @@ public class AuthSignInController extends HttpServlet {
                         response);
                 break;
             default:
-                response.sendRedirect("/home");
+                request.getRequestDispatcher("/signPage.jsp").forward(request,
+                        response);
         }
     }
 
@@ -46,9 +51,13 @@ public class AuthSignInController extends HttpServlet {
                 request.getParameter("password"));
         String url = null;
         if (isValidAccount) {
+            HttpSession session = request.getSession();
+            Account account = AccountRepo.getAccount(request.getParameter("email"));
+            session.setAttribute("account",
+                    account);
             url = "landingPage.jsp";
         } else {
-            url = "/home";
+            url = "/homepage-controller";
         }
 
         RequestDispatcher rd = request.getRequestDispatcher(url);
@@ -60,6 +69,6 @@ public class AuthSignInController extends HttpServlet {
                                HttpServletResponse response) throws ServletException, IOException {
         accountService.createAccount(request.getParameter("emailsu"),
                 request.getParameter("passwordsu"));
-        response.sendRedirect("/home");
+        response.sendRedirect("/homepage-controller");
     }
 }
