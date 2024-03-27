@@ -3,11 +3,12 @@
 <html>
 <head>
     <title>Trang Web của Tôi</title>
-    <link rel="stylesheet" href="./asset/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./asset/css/bootstrap.css">
+    <link rel="stylesheet" href="./asset/css/userInfoStyle.css">
 </head>
 <body>
-<div class="container">
+
+<%--<div class="container">
     <header class="header">
         <img src="https://salt.tikicdn.com/ts/upload/0e/07/78/ee828743c9afa9792cf20d75995e134e.png" alt="Logo">
     </header>
@@ -165,15 +166,51 @@
                 <span>Change Password</span>
             </div>
         </div>
+    </div>
+</div>--%>
+
+
+<jsp:include page="./temp-decoration/header.jsp"></jsp:include>
+
+<div class="container edit-form">
+    <h1 class="mb-5 text-center">Your information:</h1>
+    <div class="mb-3">
+        <label for="formGroupExampleInput" class="form-label">Email</label>
+        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="${}" readonly>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Birth</label>
+        <div class="row">
+            <input type="text" class="form-control col-1" placeholder="Day">
+            <input type="text" class="form-control col-1" placeholder="Month">
+            <input type="text" class="form-control col-1" placeholder="Year">
+        </div>
 
     </div>
 
+    <div class="mb-3">
+        <label for="formGroupExampleInput3" class="form-label">Address</label>
+        <input type="text" class="form-control" id="formGroupExampleInput3" placeholder="Address">
+    </div>
 
+    <div class="mb-3">
+        <label for="formGroupExampleInput3" class="form-label">Role</label>
+        <input type="text" class="form-control" id="formGroupExampleInput4" placeholder="Role">
+    </div>
+
+    <div class="mb-3">
+        <label for="formGroupExampleInput3" class="form-label">Wallet</label>
+        <input type="text" class="form-control" id="formGroupExampleInput6" placeholder="Wallet" readonly>
+        <label for="formGroupExampleInput3" class="form-label mt-3">Add to Wallet</label>
+        <input type="text" class="form-control" id="formGroupExampleInput5" placeholder="Type">
+    </div>
+
+    <div class="btn__container d-flex justify-content-center mt-3">
+        <button type="submit" class="btn btn-primary">Sign in</button>
+    </div>
 </div>
 
+<jsp:include page="./temp-decoration/footer.jsp"></jsp:include>
 
-<footer class="footer">
-
-</footer>
 </body>
 </html>
