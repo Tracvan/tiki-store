@@ -11,7 +11,8 @@ import java.io.IOException;
 @WebServlet(name = "homepagecontroller", value = "/homepage-controller")
 public class HomePageController extends HttpServlet {
     public void doGet(HttpServletRequest request,
-                      HttpServletResponse response) throws IOException, ServletException {
+
+        HttpServletResponse response) throws IOException, ServletException {
         RequestDispatcher rd = request.getRequestDispatcher("landingPage.jsp");
         rd.forward(request, response);
     }
