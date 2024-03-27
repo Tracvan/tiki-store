@@ -9,34 +9,35 @@
     </header>
     <br>
     <h1>Add New Product</h1>
-    <form method="post">
-        <div class="input-group">
-            <span class="input-group-text">Product's name</span>
-            <input type="text" value="productName" class="form-control" aria-label="Prodcut's name"></input>
-        </div>
+    <div class="container">
+        <form method="post">
+            <div class="input-group">
+                <span class="input-group-text">Product's name</span>
+                <input type="text" value="productName" class="form-control" aria-label="Prodcut's name"></input>
+            </div>
 
-        <div class="input-group">
-            <span class="input-group-text">Product's price</span>
-            <input type="text" value="productPrice" class="form-control" aria-label="Prodcut's price"></input>
-        </div>
+            <div class="input-group">
+                <span class="input-group-text">Product's price</span>
+                <input type="text" value="productPrice" class="form-control" aria-label="Prodcut's price"></input>
+            </div>
 
-        <div class="input-group">
-            <span class="input-group-text">Product's quantity</span>
-            <input type="text" value="productQuantity" class="form-control" aria-label="Prodcut's quantity"></input>
-        </div>
+            <div class="input-group">
+                <span class="input-group-text">Product's quantity</span>
+                <input type="text" value="productQuantity" class="form-control" aria-label="Prodcut's quantity"></input>
+            </div>
 
-        <div class="input-group">
-            <span class="input-group-text">Product's type</span>
-            <input type="text" value="productType" class="form-control" aria-label="Prodcut's type"></input>
-        </div>
+            <div class="input-group">
+                <span class="input-group-text">Product's type</span>
+                <input type="text" value="productType" class="form-control" aria-label="Prodcut's type"></input>
+            </div>
 
-        <div class="input-group">
-            <span class="input-group-text">Product's imagae</span>
-            <input type="text" value="productImage" class="form-control" aria-label="Prodcut's image"></input>
-        </div>
-        <button class="submit" type="submit">Save</button>
-
-    </form>
+            <div class="input-group">
+                <span class="input-group-text">Product's imagae</span>
+                <input type="text" value="productImage" class="form-control" aria-label="Prodcut's image"></input>
+            </div>
+            <button class="submit" type="submit">Save</button>
+        </form>
+    </div>
 </div>
 </body>
 </html>

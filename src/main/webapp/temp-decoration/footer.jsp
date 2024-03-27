@@ -2,104 +2,24 @@
   Created by IntelliJ IDEA.
   User: Bap
   Date: 3/26/2024
-  Time: 11:33 AM
+  Time: 3:06 PM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%--<%@ page contentType="text/html;charset=UTF-8" language="java" %>?
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-    <title>Sign Page</title>
-    <link rel="stylesheet" href="./asset/css/bootstrap.css">
-    <link rel="stylesheet" href="./asset/css/authStyle.css">
+    <title>Title</title>
 </head>
 <body>
-<%--<nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container-fluid">
-        <a class="navbar-brand temp-logo" href="#">CGSG SHOP</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
-                aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarScroll">
-            <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                       aria-expanded="false">
-                        Link
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" aria-disabled="true">Link</a>
-                </li>
-            </ul>
-            <form class="d-flex" role="search" action="#">
-                <input class="search__input form-control me-2" type="search" placeholder="Search"
-                       aria-label="Search">
-                <button class="search__btn btn btn-outline-success" type="submit">Search</button>
-            </form>
-        </div>
-    </div>
-</nav>--%>
 
-<jsp:include page="./temp-decoration/header.jsp"></jsp:include>
+</body>
+</html>--%>
 
-<main style="background-color: #aaa;">
-    <div class="main__child container-xxl d-flex justify-content-end">
-        <div class="container-xs position-relative d-flex align-items-sm-center form-container">
-            <form action="/authin?a=signin" method="post" id="sign-in">
-                <h1>Sign In</h1>
-                <div class="mb-3">
-                    <label for="email" class="form-label">Email address</label>
-                    <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp">
-                </div>
-                <div class="mb-3">
-                    <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="password" name="password">
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-                <button id="upBtn" type="button" class="btn btn-primary">Sign up</button>
-            </form>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<link rel="stylesheet" href="../asset/css/authStyle.css">
 
-            <form action="/authin?a=signup" method="post" id="sign-up">
-                <h1>Sign Up</h1>
-                <div class="mb-3">
-                    <label for="emailsu" class="form-label">Email address</label>
-                    <input type="email" class="form-control" id="emailsu" aria-describedby="emailHelp" name="emailsu">
-                </div>
-                <div class="mb-3">
-                    <label for="passwordsu" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="passwordsu" name="passwordsu">
-                </div>
-                <%--<div class="mb-3">
-                    <label for="repassword" class="form-label">Re-enter your password for
-                        verification</label>
-                    <input type="password" class="form-control" id="repassword">
-                </div>--%>
-                <button type="submit" class="btn btn-primary">Submit</button>
-                <button id="inBtn" type="button" class="btn btn-primary">Sign in</button>
-            </form>
-        </div>
-    </div>
-</main>
-
-<jsp:include page="./temp-decoration/footer.jsp"></jsp:include>
-
-<%--<footer>
+<footer>
     <div class="feature-support">
         <div class="container-list">
             <div class="container-list-1">
@@ -217,8 +137,4 @@
             © 2015 - Bản quyền thuộc về Công ty TNHH Shopee
         </p>
     </div>
-</footer>--%>
-</body>
-<script src="./asset/js/bootstrap.bundle.js"></script>
-<script src="./asset//js/authScript.js"></script>
-</html>
+</footer>
