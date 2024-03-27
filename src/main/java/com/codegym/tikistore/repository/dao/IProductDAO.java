@@ -19,4 +19,8 @@ public interface IProductDAO {
     public boolean updateProduct(Product Product) throws SQLException;
 
     public List<Product> searchProduct(HttpServletRequest request, HttpServletResponse response) throws SQLException;
+
+    public void addProduct(HttpServletRequest request, HttpServletResponse response) throws SQLException;
 }
+
+

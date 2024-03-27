@@ -60,8 +60,8 @@
         <div class="row ">
             <div class="catagory col d-flex flex-column">
                 <div class="catagory-item">
-                    <a href="" class="catagory-item-name">
-                        Test
+                    <a href="/addProduct.jsp" class="catagory-item-name">
+                        Add Product
                     </a>
                 </div>
 

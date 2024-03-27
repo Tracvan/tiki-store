@@ -2,6 +2,7 @@ package com.codegym.tikistore.repository.dao;
 
 import com.codegym.tikistore.model.Product;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.sql.*;
@@ -123,5 +124,13 @@ public class ProductDAO implements IProductDAO {
         }
         return productList;
     }
+
+    @Override
+    public void addProduct(HttpServletRequest request, HttpServletResponse response) throws SQLException {
+        RequestDispatcher dispatcher = request.getRequestDispatcher("addProduct.jsp");
+        String productName = request.getParameter("name");
+        String
+    }
+
 }
 
