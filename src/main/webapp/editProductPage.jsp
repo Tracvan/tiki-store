@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Bap
-  Date: 3/26/2024
-  Time: 2:19 PM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
@@ -16,34 +9,36 @@
 <body>
 <jsp:include page="./temp-decoration/header.jsp"></jsp:include>
 
-<form action="#">
+<form action="${pageContext.request.contextPath}/webapp?action=edit" method="post">
     <div class="container edit-form">
         <div class="mb-3">
             <label for="formGroupExampleInput" class="form-label">Product name</label>
-            <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Product name">
+            <input type="text" name="name" class="form-control" id="formGroupExampleInput"
+                   value="${product.productName}" readonly>
         </div>
         <div class="mb-3">
             <label for="formGroupExampleInput2" class="form-label">Price</label>
-            <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Price">
+            <input type="text" name="price" class="form-control" id="formGroupExampleInput2" value="${product.price}">
         </div>
 
         <div class="mb-3">
             <label for="formGroupExampleInput2" class="form-label">Quantity</label>
-            <input type="text" class="form-control" id="formGroupExampleInput3" placeholder="Quantity">
+            <input type="text" name="quantity" class="form-control" id="formGroupExampleInput3"
+                   value="${product.quantity}">
         </div>
 
         <div class="mb-3">
             <label for="formGroupExampleInput2" class="form-label">Image</label>
-            <input type="text" class="form-control" id="formGroupExampleInput4" placeholder="Image">
+            <input type="text" name="image" class="form-control" id="formGroupExampleInput4" value="${product.image}">
         </div>
 
         <div class="mb-3">
             <label for="formGroupExampleInput2" class="form-label">Type</label>
-            <input type="text" class="form-control" id="formGroupExampleInput5" placeholder="Type">
+            <input type="text" name="type" class="form-control" id="formGroupExampleInput5" value="${product.type}">
         </div>
 
         <div class="btn__container d-flex justify-content-center mt-3">
-            <button type="submit" class="btn btn-primary">Sign in</button>
+            <button type="submit" class="btn btn-primary">Save change</button>
         </div>
     </div>
 </form>
