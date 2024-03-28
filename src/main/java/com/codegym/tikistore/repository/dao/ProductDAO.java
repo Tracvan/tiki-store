@@ -9,15 +9,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductDAO implements IProductDAO {
-    private static final String INSERT_PRODUCT = "Insert into product (name, price, quantity,type, image) values (?, ?, ?, ?, ?)";
+    private static final String INSERT_PRODUCT = "Insert into product (name, price, quantity,type, image) values (?, ?, ?, ?, ?);";
 
     private static final String SELECT_PRODUCT_BY_ID = "select productID, productName, productPrice, productQuantity, " +
             "productType, productImage  from product where id =?";
-    private static final String SELECT_ALL_PRODUCT = "select * from product";
+    private static final String SELECT_ALL_PRODUCT = "select * from product;";
     private static final String DELETE_PRODUCT_SQL = "delete from product where name = ?;";
     private static final String UPDATE_PRODUCT_SQL = "update product set name = ?,price= ?, quantity =?, type=?, image=?" +
             " where name = ?;";
     private static final String SEARCH_PRODUCT = "select name, price, quantity, type, image from product where name LIKE ?; ";
+    public static final String FILTER_PRODUCT = "select * from product where type = ?;";
 
     public ProductDAO() {
 
@@ -82,6 +83,7 @@ public class ProductDAO implements IProductDAO {
              PreparedStatement statement = connection.prepareStatement(SELECT_ALL_PRODUCT);
              ResultSet rs = statement.executeQuery()) {
             while (rs.next()) {
+                int productID = rs.getInt("productId");
                 String productName = rs.getString("name");
                 double price = rs.getDouble("price");
                 int quantity = rs.getInt("quantity");
@@ -121,19 +123,40 @@ public class ProductDAO implements IProductDAO {
     public List<Product> searchProduct(HttpServletRequest request, HttpServletResponse response) throws SQLException {
         List<Product> productList = new ArrayList<>();
         String searchQuery = (String) request.getAttribute("searchQuery");
+        searchQuery = "%" + searchQuery + "%";
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(SEARCH_PRODUCT)) {
             statement.setString(1, searchQuery);
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
+                int productID = rs.getInt("productId");
                 String productName = rs.getString("name");
                 double price = rs.getDouble("price");
                 int quantity = rs.getInt("quantity");
                 String type = rs.getString("type");
                 String image = rs.getString("image");
-                productList.add(new Product(productName, price, quantity, image, type));
+                productList.add(new Product(productID, productName, price, quantity, image, type));
             }
 
+        }
+        return productList;
+    }
+
+    public List<Product> filter(String filerType) throws SQLException, NullPointerException {
+        List<Product> productList = new ArrayList<>();
+        Connection connection = getConnection();
+        PreparedStatement statement = connection.prepareStatement(FILTER_PRODUCT);
+        statement.setString(1, filerType);
+        statement.executeQuery();
+        ResultSet rs = statement.executeQuery();
+        while (rs.next()) {
+            int productId = rs.getInt("productId");
+            String productName = rs.getString("name");
+            double price = rs.getDouble("price");
+            int quantity = rs.getInt("quantity");
+            String type = rs.getString("type");
+            String image = rs.getString("image");
+            productList.add(new Product(productName, price, quantity, image, type));
         }
         return productList;
     }

@@ -60,6 +60,27 @@ public class ProductServlet extends HttpServlet {
                     throw new RuntimeException(e);
                 }
                 break;
+            case "keyboard":
+                try {
+                    filterProduct(request, response);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+                break;
+            case "headphone":
+                try {
+                    filterProduct(request, response);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+                break;
+            case "all":
+                try {
+                    showAll(request, response);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+                break;
             default:
                 try {
                     showAll(request, response);
@@ -89,6 +110,8 @@ public class ProductServlet extends HttpServlet {
                     throw new RuntimeException(e);
                 }
                 break;
+
+
             default:
                 try {
                     showAll(request, response);
@@ -162,5 +185,14 @@ public class ProductServlet extends HttpServlet {
 
     public void deleteProduct(HttpServletRequest request) throws SQLException {
         productDAO.deleteProduct(request.getParameter("name"));
+    }
+
+    public void filterProduct(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+        List<Product> productList;
+        String action = request.getParameter("action");
+        productList = productDAO.filter(action);
+        request.setAttribute("productList", productList);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("landingPage.jsp");
+        dispatcher.forward(request, response);
     }
 }

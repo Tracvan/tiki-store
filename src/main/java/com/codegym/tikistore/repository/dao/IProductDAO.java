@@ -21,6 +21,7 @@ public interface IProductDAO {
     public List<Product> searchProduct(HttpServletRequest request, HttpServletResponse response) throws SQLException;
 
 
+    List<Product> filter(String action) throws SQLException;
 }
 
 

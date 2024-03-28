@@ -50,16 +50,21 @@
                         Add Product
                     </a>
                 </div>
-
                 <div class="catagory-item">
-                    <a href="#" class="catagory-item-name">
-                        Test
+                    <a href="/webapp?action=all" class="catagory-item-name">
+                        All Product
                     </a>
                 </div>
 
                 <div class="catagory-item">
-                    <a href="" class="catagory-item-name">
-                        Test
+                    <a href="/webapp?action=keyboard" class="catagory-item-name">
+                        Keyboard
+                    </a>
+                </div>
+
+                <div class="catagory-item">
+                    <a href="/webapp?action=headphone" class="catagory-item-name">
+                        Head Phone
                     </a>
                 </div>
 
