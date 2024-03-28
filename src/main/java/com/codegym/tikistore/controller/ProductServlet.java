@@ -36,16 +36,17 @@ public class ProductServlet extends HttpServlet {
                 break;
             case "create":
                 try {
+                    getTypeList(request, response);
                     addProduct(request, response);
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
                 break;
             case "edit":
-                String name = request.getParameter("name");
+                int productId = Integer.parseInt(request.getParameter("productId"));
                 ProductDAO productDAO1 = new ProductDAO();
                 try {
-                    Product product = productDAO1.selectProduct(name);
+                    Product product = productDAO1.selectProduct(productId);
                     request.setAttribute("product", product);
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
@@ -111,7 +112,6 @@ public class ProductServlet extends HttpServlet {
                 }
                 break;
 
-
             default:
                 try {
                     showAll(request, response);
@@ -159,12 +159,13 @@ public class ProductServlet extends HttpServlet {
     }
 
     public void updateProduct(HttpServletRequest request, HttpServletResponse response) throws SQLException {
+        int productId = Integer.parseInt(request.getParameter("productId"));
         String newName = request.getParameter("name");
         double newPrice = Double.parseDouble(request.getParameter("price"));
         int newQuantity = Integer.parseInt(request.getParameter("quantity"));
         String newType = request.getParameter("type");
         String newImage = request.getParameter("image");
-        Product newProduct = new Product(newName, newPrice, newQuantity, newType, newImage);
+        Product newProduct = new Product(productId, newName, newPrice, newQuantity, newType, newImage);
         productDAO.updateProduct(newProduct);
 
     }
@@ -175,7 +176,7 @@ public class ProductServlet extends HttpServlet {
         int quantity = Integer.parseInt(request.getParameter("quantity"));
         String type = request.getParameter("type");
         String image = request.getParameter("image");
-        Product newProduct = new Product(productName, price, quantity, image, type);
+        Product newProduct = new Product(productName, price, quantity, type, image);
         try {
             productDAO.insertProduct(newProduct);
         } catch (SQLException e) {
@@ -184,7 +185,7 @@ public class ProductServlet extends HttpServlet {
     }
 
     public void deleteProduct(HttpServletRequest request) throws SQLException {
-        productDAO.deleteProduct(request.getParameter("name"));
+        productDAO.deleteProduct(Integer.parseInt(request.getParameter("productId")));
     }
 
     public void filterProduct(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
@@ -193,6 +194,16 @@ public class ProductServlet extends HttpServlet {
         productList = productDAO.filter(action);
         request.setAttribute("productList", productList);
         RequestDispatcher dispatcher = request.getRequestDispatcher("landingPage.jsp");
+        dispatcher.forward(request, response);
+
+    }
+
+    public void getTypeList(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+        List<String> typeList = productDAO.getTypeList();
+        request.setAttribute("typeList", typeList);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("addProduct.jsp");
+        dispatcher.forward(request, response);
+        RequestDispatcher dispatcher1 = request.getRequestDispatcher("landingPage.jsp");
         dispatcher.forward(request, response);
     }
 }

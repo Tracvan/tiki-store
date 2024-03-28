@@ -89,9 +89,9 @@
                                 <h5 class="card-title">${product.productName}</h5>
                                 <p class="card-text">Price: ${product.price}$</p>
                                 <p class="card-text">Quantity: ${product.quantity}</p>
-                                <a href="/webapp?action=delete&name=${product.productName}"
+                                <a href="/webapp?action=delete&productId=${product.productId}"
                                    class="btn btn-primary">Delete</a>
-                                <a href="/webapp?action=edit&name=${product.productName}"
+                                <a href="/webapp?action=edit&productId=${product.productId}"
                                    class="btn btn-primary">Edit</a>
                             </div>
                         </div>
