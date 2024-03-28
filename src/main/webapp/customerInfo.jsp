@@ -208,11 +208,13 @@
                    name="wallet">
             <label for="formGroupExampleInput3" class="form-label mt-3">Add to Wallet</label>
             <input type="text" class="form-control" id="formGroupExampleInput5" placeholder="$" name="addWallet"
+                   value="0"
                    required>
         </div>
 
         <div class="btn__container d-flex justify-content-center mt-3">
             <button type="submit" class="btn btn-primary">Change</button>
+            <a class="btn btn-danger" href="l" role="button" style="margin: 20px 0 0 50px;">Delete account</a>
         </div>
     </form>
 </div>

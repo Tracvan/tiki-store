@@ -58,7 +58,7 @@ public class AccountRepo {
     public boolean checkAccountSignIn(String email,
                                       String password) {
         try (Connection connection = DBConnection.getConnection();
-             PreparedStatement prstm = connection.prepareStatement("select * from account where email=? and password=?;")) {
+             PreparedStatement prstm = connection.prepareStatement("select * from account where binary email=? and password=?;")) {
             prstm.setString(1,
                     email);
             prstm.setString(2,

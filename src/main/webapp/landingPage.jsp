@@ -25,7 +25,7 @@
                     <a class="nav-link" href="/webapp">Product List</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+                    <a class="nav-link" href="/authin?action=signout">Sign Out</a>
                 </li>
             </ul>
             <form class="d-flex" action="/webapp" method="get">

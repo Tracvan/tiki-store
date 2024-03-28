@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebServlet(name = "homepagecontroller", value = "/homepage-controller")
@@ -14,6 +15,8 @@ public class HomePageController extends HttpServlet {
                       HttpServletResponse response) throws IOException, ServletException {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
+
+        HttpSession session = request.getSession();
 
         RequestDispatcher rd = request.getRequestDispatcher("landingPage.jsp");
         rd.forward(request,
