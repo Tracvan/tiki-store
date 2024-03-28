@@ -11,10 +11,11 @@
 
 <form action="${pageContext.request.contextPath}/webapp?action=edit" method="post">
     <div class="container edit-form">
+        <input type="hidden" hidden="hidden" name="productId" value="${product.productId}">
         <div class="mb-3">
             <label for="formGroupExampleInput" class="form-label">Product name</label>
             <input type="text" name="name" class="form-control" id="formGroupExampleInput"
-                   value="${product.productName}" readonly>
+                   value="${product.productName}">
         </div>
         <div class="mb-3">
             <label for="formGroupExampleInput2" class="form-label">Price</label>
@@ -28,13 +29,13 @@
         </div>
 
         <div class="mb-3">
-            <label for="formGroupExampleInput2" class="form-label">Image</label>
-            <input type="text" name="image" class="form-control" id="formGroupExampleInput4" value="${product.image}">
+            <label for="formGroupExampleInput2" class="form-label">Type</label>
+            <input type="text" name="type" class="form-control" id="formGroupExampleInput4" value="${product.type}">
         </div>
 
         <div class="mb-3">
-            <label for="formGroupExampleInput2" class="form-label">Type</label>
-            <input type="text" name="type" class="form-control" id="formGroupExampleInput5" value="${product.type}">
+            <label for="formGroupExampleInput2" class="form-label">Image</label>
+            <input type="text" name="image" class="form-control" id="formGroupExampleInput5" value="${product.image}">
         </div>
 
         <div class="btn__container d-flex justify-content-center mt-3">

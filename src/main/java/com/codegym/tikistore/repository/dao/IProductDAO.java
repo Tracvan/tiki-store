@@ -10,17 +10,21 @@ import java.util.List;
 public interface IProductDAO {
     public void insertProduct(Product product) throws SQLException;
 
-    public Product selectProduct(String name) throws SQLException;
+    Product selectProduct(int id) throws SQLException;
+
 
     public List<Product> selectAllProduct() throws SQLException;
 
-    public void deleteProduct(String name) throws SQLException;
+    public void deleteProduct(int productID) throws SQLException;
 
     public void updateProduct(Product Product) throws SQLException;
 
     public List<Product> searchProduct(HttpServletRequest request, HttpServletResponse response) throws SQLException;
 
 
+    List<Product> filter(String action) throws SQLException;
+
+    List<String> getTypeList() throws SQLException;
 }
 
 
