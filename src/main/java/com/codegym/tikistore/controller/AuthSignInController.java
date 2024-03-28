@@ -3,6 +3,7 @@ package com.codegym.tikistore.controller;
 import com.codegym.tikistore.model.Account;
 import com.codegym.tikistore.repository.accountDAO.AccountRepo;
 import com.codegym.tikistore.repository.accountDAO.DBConnection;
+import com.codegym.tikistore.repository.dao.ProductDAO;
 import com.codegym.tikistore.service.account.AccountService;
 
 import javax.servlet.RequestDispatcher;
@@ -98,13 +99,15 @@ public class AuthSignInController extends HttpServlet {
                     account);
             session.setAttribute("isSignIn",
                     true);
-            url = "/webapp";
+            url = "/webapp?page=1";
+            ProductDAO.countProduct(request,
+                    "");
         } else {
             request.setAttribute("email",
                     request.getParameter("email"));
             request.setAttribute("signInAlert",
                     "Your email or password is not right, try again!");
-            request.getRequestDispatcher("/authin").forward(request,
+            request.getRequestDispatcher("/signPage.jsp").forward(request,
                     response);
         }
 

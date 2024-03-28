@@ -96,6 +96,13 @@
                             </div>
                         </div>
                     </c:forEach>
+
+                    <div>
+                        <c:forEach var="i" begin="1" end="${endPage}">
+                            <a type="button" class="btn btn-outline-primary"
+                               href="/webapp?action=${action}&page=${i}&searchQuery=${searchQuery}">${i}</a>
+                        </c:forEach>
+                    </div>
                 </div>
             </div>
         </div>

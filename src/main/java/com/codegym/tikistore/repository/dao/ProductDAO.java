@@ -19,7 +19,7 @@ public class ProductDAO implements IProductDAO {
     private static final String UPDATE_PRODUCT_SQL =
             "update product set name = ?,price= ?, quantity =?, type=?, image=?"
             + " where productId = ?;";
-    private static final String SEARCH_PRODUCT = "select productId, name, price, quantity, type, image from product where name LIKE ?; ";
+    private static final String SEARCH_PRODUCT = "select productId, name, price, quantity, type, image from product where name LIKE ? ORDER BY productId DESC LIMIT 6 OFFSET ?; ";
 
 
     public ProductDAO() {
@@ -42,6 +42,54 @@ public class ProductDAO implements IProductDAO {
             throw new RuntimeException(e);
         }
         return connection;
+    }
+
+    /*public static void countFilter(HttpServletRequest request,
+                                   String filter) {
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement("SELECT COUTN(*) FROM product WHERE type = ?")) {
+            statement.setString(1,
+                    filter);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                int total = rs.getInt(1);
+                int endPage = 1;
+                if ((total % 6) != 0) {
+                    endPage = (total / 6) + 1;
+                } else {
+                    endPage = total / 6;
+                }
+                request.setAttribute("endPage",
+                        endPage);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }*/
+
+    public static void countProduct(HttpServletRequest request,
+                                    String searchQuery) {
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement("SELECT COUNT(*) FROM product WHERE name LIKE ?")) {
+            searchQuery = "%" + searchQuery + "%";
+            statement.setString(1,
+                    searchQuery);
+            ResultSet rs = statement.executeQuery();
+            int total = 1;
+            int endPage = 1;
+            while (rs.next()) {
+                total = rs.getInt(1);
+            }
+            if ((total % 6) != 0) {
+                endPage = (total / 6) + 1;
+            } else {
+                endPage = total / 6;
+            }
+            request.setAttribute("endPage",
+                    endPage);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -99,8 +147,9 @@ public class ProductDAO implements IProductDAO {
     }
 
     @Override
-    public List<Product> selectAllProduct() throws SQLException {
-        List<Product> productList = new ArrayList<>();
+    public List<Product> selectAllProduct(HttpServletRequest request,
+                                          HttpServletResponse response) throws SQLException {
+        /*List<Product> productList = new ArrayList<>();
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(SELECT_ALL_PRODUCT);
              ResultSet rs = statement.executeQuery()) {
@@ -120,7 +169,11 @@ public class ProductDAO implements IProductDAO {
                         image));
 
             }
-        }
+        }*/
+        request.setAttribute("searchQuery",
+                "");
+        List<Product> productList = searchProduct(request,
+                response);
         return productList;
     }
 
@@ -162,10 +215,18 @@ public class ProductDAO implements IProductDAO {
         List<Product> productList = new ArrayList<>();
         String searchQuery = (String) request.getAttribute("searchQuery");
         searchQuery = "%" + searchQuery + "%";
+        countProduct(request,
+                searchQuery);
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(SEARCH_PRODUCT)) {
             statement.setString(1,
                     searchQuery);
+            int page = 1;
+            if (request.getParameter("page") != null) {
+                page = Integer.parseInt(request.getParameter("page"));
+            }
+            statement.setInt(2,
+                    (page - 1) * 6);
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                 int productId = rs.getInt("productId");
@@ -190,9 +251,15 @@ public class ProductDAO implements IProductDAO {
     public List<Product> filter(String filerType) throws SQLException, NullPointerException {
         List<Product> productList = new ArrayList<>();
         Connection connection = getConnection();
+
+        /*countFilter(request,
+                filerType);*/
+
         PreparedStatement statement = connection.prepareStatement(FILTER_PRODUCT);
         statement.setString(1,
                 filerType);
+        /*statement.setInt(2,
+                (page - 1) * 6);*/
         statement.executeQuery();
         ResultSet rs = statement.executeQuery();
         while (rs.next()) {

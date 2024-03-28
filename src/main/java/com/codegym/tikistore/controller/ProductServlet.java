@@ -39,8 +39,10 @@ public class ProductServlet extends HttpServlet {
                 break;
             case "create":
                 try {
-                    getTypeList(request, response);
-                    addProduct(request, response);
+                    getTypeList(request,
+                            response);
+                    addProduct(request,
+                            response);
 
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
@@ -51,7 +53,8 @@ public class ProductServlet extends HttpServlet {
                 ProductDAO productDAO1 = new ProductDAO();
                 try {
                     Product product = productDAO1.selectProduct(productId);
-                    request.setAttribute("product", product);
+                    request.setAttribute("product",
+                            product);
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
@@ -68,21 +71,24 @@ public class ProductServlet extends HttpServlet {
                 break;
             case "keyboard":
                 try {
-                    filterProduct(request, response);
+                    filterProduct(request,
+                            response);
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
                 break;
             case "headphone":
                 try {
-                    filterProduct(request, response);
+                    filterProduct(request,
+                            response);
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
                 break;
             case "all":
                 try {
-                    showAll(request, response);
+                    showAll(request,
+                            response);
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
@@ -136,7 +142,8 @@ public class ProductServlet extends HttpServlet {
                         HttpServletResponse response) throws SQLException, ServletException, IOException {
         List<Product> productList;
         try {
-            productList = productDAO.selectAllProduct();
+            productList = productDAO.selectAllProduct(request,
+                    response);
             RequestDispatcher dispatcher = request.getRequestDispatcher("landingPage.jsp");
             request.setAttribute("productList",
                     productList);
@@ -162,6 +169,10 @@ public class ProductServlet extends HttpServlet {
                 response);
         request.setAttribute("productList",
                 productList);
+        request.setAttribute("action",
+                "search");
+        request.setAttribute("searchQuery",
+                searchQuery);
         RequestDispatcher dispatcher = request.getRequestDispatcher("landingPage.jsp");
         dispatcher.forward(request,
                 response);
@@ -202,7 +213,12 @@ public class ProductServlet extends HttpServlet {
         int newQuantity = Integer.parseInt(request.getParameter("quantity"));
         String newType = request.getParameter("type");
         String newImage = request.getParameter("image");
-        Product newProduct = new Product(productId, newName, newPrice, newQuantity, newType, newImage);
+        Product newProduct = new Product(productId,
+                newName,
+                newPrice,
+                newQuantity,
+                newType,
+                newImage);
 
         productDAO.updateProduct(newProduct);
 
@@ -231,23 +247,35 @@ public class ProductServlet extends HttpServlet {
         productDAO.deleteProduct(Integer.parseInt(request.getParameter("productId")));
     }
 
-    public void filterProduct(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+    public void filterProduct(HttpServletRequest request,
+                              HttpServletResponse response) throws SQLException, ServletException, IOException {
         List<Product> productList;
         String action = request.getParameter("action");
+
+        int page = 1;
+        if (request.getParameter("page") != null) {
+            page = Integer.parseInt(request.getParameter("page"));
+        }
+
         productList = productDAO.filter(action);
-        request.setAttribute("productList", productList);
+        request.setAttribute("productList",
+                productList);
         RequestDispatcher dispatcher = request.getRequestDispatcher("landingPage.jsp");
-        dispatcher.forward(request, response);
+        dispatcher.forward(request,
+                response);
 
     }
 
-    public void getTypeList(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+    public void getTypeList(HttpServletRequest request,
+                            HttpServletResponse response) throws SQLException, ServletException, IOException {
         List<String> typeList = productDAO.getTypeList();
-        request.setAttribute("typeList", typeList);
+        request.setAttribute("typeList",
+                typeList);
         RequestDispatcher dispatcher = request.getRequestDispatcher("addProduct.jsp");
-        dispatcher.forward(request, response);
+        dispatcher.forward(request,
+                response);
         RequestDispatcher dispatcher1 = request.getRequestDispatcher("landingPage.jsp");
-        dispatcher.forward(request, response);
+        dispatcher.forward(request,
+                response);
     }
-}
 }

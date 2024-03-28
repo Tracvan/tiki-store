@@ -13,13 +13,15 @@ public interface IProductDAO {
     Product selectProduct(int id) throws SQLException;
 
 
-    public List<Product> selectAllProduct() throws SQLException;
+    public List<Product> selectAllProduct(HttpServletRequest request,
+                                          HttpServletResponse response) throws SQLException;
 
     public void deleteProduct(int productID) throws SQLException;
 
     public void updateProduct(Product Product) throws SQLException;
 
-    public List<Product> searchProduct(HttpServletRequest request, HttpServletResponse response) throws SQLException;
+    public List<Product> searchProduct(HttpServletRequest request,
+                                       HttpServletResponse response) throws SQLException;
 
 
     List<Product> filter(String action) throws SQLException;
