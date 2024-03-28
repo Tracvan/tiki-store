@@ -269,7 +269,8 @@ public class ProductDAO implements IProductDAO {
             int quantity = rs.getInt("quantity");
             String type = rs.getString("type");
             String image = rs.getString("image");
-            productList.add(new Product(productName,
+            productList.add(new Product(productId,
+                    productName,
                     price,
                     quantity,
                     type,

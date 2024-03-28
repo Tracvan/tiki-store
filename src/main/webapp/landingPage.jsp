@@ -56,29 +56,18 @@
                     </a>
                 </div>
 
-                <div class="catagory-item">
-                    <a href="/webapp?action=keyboard" class="catagory-item-name">
-                        Keyboard
-                    </a>
-                </div>
-
-                <div class="catagory-item">
-                    <a href="/webapp?action=headphone" class="catagory-item-name">
-                        Head Phone
-                    </a>
-                </div>
-
-                <div class="catagory-item">
-                    <a href="" class="catagory-item-name">
-                        Test
-                    </a>
-                </div>
-
-                <div class="catagory-item">
-                    <a href="" class="catagory-item-name">
-                        Test
-                    </a>
-                </div>
+                <c:forEach items="${typeList}" var="type">
+                    <div class="catagory-item">
+                        <a href="/webapp?action=filter&type=${type}" class="catagory-item-name">
+                                ${type}
+                        </a>
+                    </div>
+                </c:forEach>
+                <%--                <div class="catagory-item">--%>
+                <%--                    <a href="/webapp?action=headphone" class="catagory-item-name">--%>
+                <%--                        Head Phone--%>
+                <%--                    </a>--%>
+                <%--                </div>--%>
             </div>
             <div class="display-product col-10">
                 <div class="row">
