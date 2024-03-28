@@ -83,9 +83,15 @@
 
         <div class="mb-3">
             <label for="formGroupExampleInput2" class="form-label">Type</label>
-            <input type="text" name="type" class="form-control" id="formGroupExampleInput5">
+            <select id="mySelect" onchange="showInput()" name="type">
+                <option readonly>Select your choice</option>
+                <c:forEach items="${typeList}" var="type">
+                    <option value="${type}">${type}</option>
+                </c:forEach>
+                <option value="other">Other</option>
+            </select>
+            <input name="type" type="text" id="otherInput" style="display: none"/>
         </div>
-
         <div class="btn__container d-flex justify-content-center mt-3">
             <button type="submit" class="btn btn-primary">Save change</button>
         </div>
@@ -94,5 +100,18 @@
 
 <jsp:include page="./temp-decoration/footer.jsp"></jsp:include>
 </body>
-<script src="./asset/js/bootstrap.bundle.js"></script>
+<script src="./asset/js/bootstrap.bundle.js">
+</script>
+<script>
+    function showInput() {
+        let selectBox = document.getElementById("mySelect");
+        let otherInput = document.getElementById("otherInput");
+
+        if (selectBox.value === "other") {
+            otherInput.style.display = "block"; // Hiển thị input text
+        } else {
+            otherInput.style.display = "none"; // Ẩn input text
+        }
+    }
+</script>
 </html>

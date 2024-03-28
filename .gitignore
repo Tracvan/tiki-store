@@ -49,3 +49,4 @@ bin/
 .idea/dataSources.xml
 .idea/jsLibraryMappings.xml
 .idea/uiDesigner.xml
+.idea/webContexts.xml

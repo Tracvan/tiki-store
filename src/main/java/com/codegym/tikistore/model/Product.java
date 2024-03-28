@@ -1,6 +1,7 @@
 package com.codegym.tikistore.model;
 
 public class Product {
+    private int productId;
     private String productName;
     private double price;
     private int quantity;
@@ -10,13 +11,26 @@ public class Product {
     public Product(String productName,
                    double price,
                    int quantity,
-                   String image,
-                   String type) {
+                   String type,
+                   String image) {
         this.productName = productName;
         this.price = price;
         this.quantity = quantity;
         this.image = image;
         this.type = type;
+    }
+
+    public Product(int productId, String productName, double price, int quantity, String type, String image) {
+        this.productId = productId;
+        this.productName = productName;
+        this.price = price;
+        this.quantity = quantity;
+        this.image = image;
+        this.type = type;
+    }
+
+    public int getProductId() {
+        return productId;
     }
 
     public String getProductName() {
