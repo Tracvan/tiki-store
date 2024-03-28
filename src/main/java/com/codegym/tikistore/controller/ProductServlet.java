@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(name = "ProductServlet", urlPatterns = "/webapp")
@@ -22,10 +23,17 @@ public class ProductServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<String> types = new ArrayList<>();
         String action = request.getParameter("action");
         if (action == null) {
             action = "";
         }
+        try {
+            types = productDAO.getTypeList();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
         switch (action) {
             case "search":
                 try {
@@ -61,18 +69,11 @@ public class ProductServlet extends HttpServlet {
                     throw new RuntimeException(e);
                 }
                 break;
-            case "keyboard":
+            case "filter":
                 try {
                     filterProduct(request, response);
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
-                break;
-            case "headphone":
-                try {
-                    filterProduct(request, response);
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
                 }
                 break;
             case "all":
@@ -112,6 +113,7 @@ public class ProductServlet extends HttpServlet {
                 }
                 break;
 
+
             default:
                 try {
                     showAll(request, response);
@@ -124,10 +126,13 @@ public class ProductServlet extends HttpServlet {
 
     public void showAll(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
         List<Product> productList;
+        List<String> typeList;
         try {
+            typeList = productDAO.getTypeList();
             productList = productDAO.selectAllProduct();
             RequestDispatcher dispatcher = request.getRequestDispatcher("landingPage.jsp");
             request.setAttribute("productList", productList);
+            request.setAttribute("typeList", typeList);
             dispatcher.forward(request, response);
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -190,12 +195,13 @@ public class ProductServlet extends HttpServlet {
 
     public void filterProduct(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
         List<Product> productList;
-        String action = request.getParameter("action");
-        productList = productDAO.filter(action);
+        List<String> typeList = productDAO.getTypeList();
+        String type = request.getParameter("type");
+        productList = productDAO.filter(type);
+        request.setAttribute("typeList", typeList);
         request.setAttribute("productList", productList);
         RequestDispatcher dispatcher = request.getRequestDispatcher("landingPage.jsp");
         dispatcher.forward(request, response);
-
     }
 
     public void getTypeList(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
@@ -203,7 +209,12 @@ public class ProductServlet extends HttpServlet {
         request.setAttribute("typeList", typeList);
         RequestDispatcher dispatcher = request.getRequestDispatcher("addProduct.jsp");
         dispatcher.forward(request, response);
-        RequestDispatcher dispatcher1 = request.getRequestDispatcher("landingPage.jsp");
+    }
+
+    public void sendTypeList(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+        List<String> typeList = productDAO.getTypeList();
+        request.setAttribute("typeList", typeList);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("landingPage.jsp");
         dispatcher.forward(request, response);
     }
 }
