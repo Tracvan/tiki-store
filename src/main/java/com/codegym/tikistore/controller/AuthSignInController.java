@@ -51,6 +51,11 @@ public class AuthSignInController extends HttpServlet {
                 session.invalidate();
                 response.sendRedirect("/authin");
                 break;
+            case "delete":
+                AccountRepo.deleteAccount(request);
+                request.getRequestDispatcher("/authin?action=signout").forward(request,
+                        response);
+                break;
             default:
                 request.getRequestDispatcher("/signPage.jsp").forward(request,
                         response);

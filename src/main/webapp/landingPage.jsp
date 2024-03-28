@@ -28,6 +28,9 @@
                     <a class="nav-link" href="/authin?action=signout">Sign Out</a>
                 </li>
             </ul>
+
+            <h3 class="position-relative" style="left: -300px">Welcome back, ${account.email.split("@")[0]}!</h3>
+
             <form class="d-flex" action="/webapp" method="get">
                 <input class="search__input form-control me-2" type="search" hidden
                        aria-label="Search" name="action" value="search">
