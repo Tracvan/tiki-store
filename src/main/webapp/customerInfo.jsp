@@ -208,11 +208,38 @@
                    name="wallet">
             <label for="formGroupExampleInput3" class="form-label mt-3">Add to Wallet</label>
             <input type="text" class="form-control" id="formGroupExampleInput5" placeholder="$" name="addWallet"
+                   value="0"
                    required>
         </div>
 
         <div class="btn__container d-flex justify-content-center mt-3">
             <button type="submit" class="btn btn-primary">Change</button>
+            <button type="button" class="btn btn-danger ms-5" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                Delete account
+            </button>
+
+            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+                 tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                Would you really like to delete your account?
+                            </div>
+                            <div class="modal-footer">
+                                <a type="button" class="btn btn-danger" href="/authin?action=delete">Delete</a>
+                                <a type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancel</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Button trigger modal -->
         </div>
     </form>
 </div>
@@ -221,4 +248,5 @@
 <jsp:include page="./temp-decoration/footer.jsp"></jsp:include>
 
 </body>
+<script src="./asset/js/bootstrap.bundle.js"></script>
 </html>

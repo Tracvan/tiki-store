@@ -2,6 +2,8 @@ package com.codegym.tikistore.controller;
 
 import com.codegym.tikistore.model.Account;
 import com.codegym.tikistore.repository.accountDAO.AccountRepo;
+import com.codegym.tikistore.repository.accountDAO.DBConnection;
+import com.codegym.tikistore.repository.dao.ProductDAO;
 import com.codegym.tikistore.service.account.AccountService;
 
 import javax.servlet.RequestDispatcher;
@@ -12,6 +14,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 @WebServlet(name = "authsignincontroller", urlPatterns = "/authin")
 public class AuthSignInController extends HttpServlet {
@@ -19,8 +25,41 @@ public class AuthSignInController extends HttpServlet {
 
     public void doGet(HttpServletRequest request,
                       HttpServletResponse response) throws IOException, ServletException {
-        request.getRequestDispatcher("/signPage.jsp").forward(request,
-                response);
+        if (request.getAttribute("signUpAlert") == null) {
+            request.setAttribute("signUpAlert",
+                    "");
+        }
+        if (request.getAttribute("signInAlert") == null) {
+            request.setAttribute("signInAlert",
+                    "");
+        }
+
+        if (request.getAttribute("signUpSuccess") == null) {
+            request.setAttribute("signUpSuccess",
+                    "");
+        }
+
+        String action = request.getParameter("action");
+
+        if (action == null) {
+            action = "";
+        }
+
+        switch (action) {
+            case "signout":
+                HttpSession session = request.getSession();
+                session.invalidate();
+                response.sendRedirect("/authin");
+                break;
+            case "delete":
+                AccountRepo.deleteAccount(request);
+                request.getRequestDispatcher("/authin?action=signout").forward(request,
+                        response);
+                break;
+            default:
+                request.getRequestDispatcher("/signPage.jsp").forward(request,
+                        response);
+        }
     }
 
     @Override
@@ -36,12 +75,20 @@ public class AuthSignInController extends HttpServlet {
                         response);
                 break;
             case "signup":
-                createAccount(request,
-                        response);
+                if (!isVariableAccount(request)) {
+                    createAccount(request,
+                            response);
+                } else {
+                    request.setAttribute("emailsu",
+                            request.getParameter("emailsu"));
+                    request.setAttribute("signUpAlert",
+                            "This email has already existed!");
+                    request.getRequestDispatcher("/signPage.jsp").forward(request,
+                            response);
+                }
                 break;
             default:
-                request.getRequestDispatcher("/signPage.jsp").forward(request,
-                        response);
+                response.sendRedirect("/authin");
         }
     }
 
@@ -55,9 +102,18 @@ public class AuthSignInController extends HttpServlet {
             Account account = AccountRepo.getAccount(request.getParameter("email"));
             session.setAttribute("account",
                     account);
-            url = "landingPage.jsp";
+            session.setAttribute("isSignIn",
+                    true);
+            url = "/webapp?page=1";
+            ProductDAO.countProduct(request,
+                    "");
         } else {
-            url = "/homepage-controller";
+            request.setAttribute("email",
+                    request.getParameter("email"));
+            request.setAttribute("signInAlert",
+                    "Your email or password is not right, try again!");
+            request.getRequestDispatcher("/signPage.jsp").forward(request,
+                    response);
         }
 
         RequestDispatcher rd = request.getRequestDispatcher(url);
@@ -65,10 +121,34 @@ public class AuthSignInController extends HttpServlet {
                 response);
     }
 
+    private boolean isVariableAccount(HttpServletRequest request) {
+        try (Connection connection = DBConnection.getConnection();
+             PreparedStatement prstm = connection.prepareStatement("select * from account where binary email=?")) {
+            prstm.setString(1,
+                    request.getParameter("emailsu"));
+
+            ResultSet rs = prstm.executeQuery();
+
+            while (rs.next()) {
+                return true;
+            }
+            return false;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     private void createAccount(HttpServletRequest request,
                                HttpServletResponse response) throws ServletException, IOException {
         accountService.createAccount(request.getParameter("emailsu"),
                 request.getParameter("passwordsu"));
-        response.sendRedirect("/homepage-controller");
+
+        request.setAttribute("emailsu",
+                request.getParameter("emailsu"));
+        HttpSession session = request.getSession();
+        session.setAttribute("signUpSuccess",
+                "Your account has created!");
+        request.getRequestDispatcher("/signPage.jsp").forward(request,
+                response);
     }
 }

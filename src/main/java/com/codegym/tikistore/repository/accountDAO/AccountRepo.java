@@ -2,6 +2,8 @@ package com.codegym.tikistore.repository.accountDAO;
 
 import com.codegym.tikistore.model.Account;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -55,10 +57,23 @@ public class AccountRepo {
         return account;
     }
 
+    public static void deleteAccount(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        Account account = (Account) session.getAttribute("account");
+        try (Connection connection = DBConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement("DELETE FROM account WHERE email = ?")) {
+            statement.setString(1,
+                    account.getEmail());
+            statement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public boolean checkAccountSignIn(String email,
                                       String password) {
         try (Connection connection = DBConnection.getConnection();
-             PreparedStatement prstm = connection.prepareStatement("select * from account where email=? and password=?;")) {
+             PreparedStatement prstm = connection.prepareStatement("select * from account where binary email=? and password=?;")) {
             prstm.setString(1,
                     email);
             prstm.setString(2,
