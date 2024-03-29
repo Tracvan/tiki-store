@@ -30,12 +30,6 @@ public class ProductServlet extends HttpServlet {
         if (action == null) {
             action = "";
         }
-        try {
-            types = productDAO.getTypeList();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
         switch (action) {
             case "search":
                 try {
@@ -66,8 +60,12 @@ public class ProductServlet extends HttpServlet {
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
-                editProduct(request,
-                        response);
+                try {
+                    editProduct(request,
+                            response);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
                 break;
             case "delete":
                 try {
@@ -126,8 +124,6 @@ public class ProductServlet extends HttpServlet {
                     throw new RuntimeException(e);
                 }
                 break;
-
-
             default:
                 try {
                     showAll(request,
@@ -162,6 +158,8 @@ public class ProductServlet extends HttpServlet {
     public void searchProduct(HttpServletRequest request,
                               HttpServletResponse response) throws SQLException, ServletException, IOException {
         String searchQuery = request.getParameter("searchQuery");
+        searchQuery = searchQuery.trim();
+        List<String> typeList = productDAO.getTypeList();
         if (searchQuery.equals("")) {
             searchQuery = "%%";
             request.setAttribute("searchQuery",
@@ -178,6 +176,7 @@ public class ProductServlet extends HttpServlet {
                 "search");
         request.setAttribute("searchQuery",
                 searchQuery);
+        request.setAttribute("typeList", typeList);
         RequestDispatcher dispatcher = request.getRequestDispatcher("landingPage.jsp");
         dispatcher.forward(request,
                 response);
@@ -202,7 +201,9 @@ public class ProductServlet extends HttpServlet {
     }
 
     public void editProduct(HttpServletRequest request,
-                            HttpServletResponse response) throws ServletException, IOException {
+                            HttpServletResponse response) throws ServletException, IOException, SQLException {
+        List<String> typeList = productDAO.getTypeList();
+        request.setAttribute("typeList", typeList);
         RequestDispatcher dispatcher = request.getRequestDispatcher("editProductPage.jsp");
         dispatcher.forward(request,
                 response);
@@ -216,13 +217,22 @@ public class ProductServlet extends HttpServlet {
         String newName = request.getParameter("name");
         double newPrice = Double.parseDouble(request.getParameter("price"));
         int newQuantity = Integer.parseInt(request.getParameter("quantity"));
-        String newType = request.getParameter("type");
+        String type = "";
+        String inputType = request.getParameter("type");
+        String otherType = request.getParameter("otherType");
+
+        if (inputType.equals("other")) {
+            type = otherType;
+        } else {
+            type = inputType;
+        }
+//        String newType = request.getParameter("type");
         String newImage = request.getParameter("image");
         Product newProduct = new Product(productId,
                 newName,
                 newPrice,
                 newQuantity,
-                newType,
+                type,
                 newImage);
 
         productDAO.updateProduct(newProduct);
@@ -234,13 +244,22 @@ public class ProductServlet extends HttpServlet {
         String productName = request.getParameter("productName");
         double price = Double.parseDouble(request.getParameter("price"));
         int quantity = Integer.parseInt(request.getParameter("quantity"));
-        String type = request.getParameter("type");
+        String type = "";
+        String inputType = request.getParameter("type");
+        String otherType = request.getParameter("otherType");
+
+        if (inputType.equals("other")) {
+            type = otherType;
+        } else {
+            type = inputType;
+        }
+
         String image = request.getParameter("image");
         Product newProduct = new Product(productName,
                 price,
                 quantity,
-                image,
-                type);
+                type,
+                image);
         try {
             productDAO.insertProduct(newProduct);
         } catch (SQLException e) {

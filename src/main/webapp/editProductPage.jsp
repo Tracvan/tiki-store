@@ -30,7 +30,13 @@
 
         <div class="mb-3">
             <label for="formGroupExampleInput2" class="form-label">Type</label>
-            <input type="text" name="type" class="form-control" id="formGroupExampleInput4" value="${product.type}">
+            <select id="mySelect" onchange="showInput()" name="type">
+                <option readonly>Select your choice</option>
+                <c:forEach items="${typeList}" var="type">
+                    <option value="${type}">${type}</option>
+                </c:forEach>
+                <option value="other">Other</option>
+            </select>
         </div>
 
         <div class="mb-3">
