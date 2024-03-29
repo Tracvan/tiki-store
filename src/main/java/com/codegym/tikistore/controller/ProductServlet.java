@@ -179,7 +179,14 @@ public class ProductServlet extends HttpServlet {
         String productName = request.getParameter("productName");
         double price = Double.parseDouble(request.getParameter("price"));
         int quantity = Integer.parseInt(request.getParameter("quantity"));
-        String type = request.getParameter("type");
+        String type = "";
+        String inputType = request.getParameter("type");
+        String otherType = request.getParameter("otherType");
+        if ("".equals(inputType)) {
+            type = inputType;
+        } else if ("other".equals(inputType)) {
+            type = otherType;
+        }
         String image = request.getParameter("image");
         Product newProduct = new Product(productName, price, quantity, type, image);
         try {

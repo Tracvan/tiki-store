@@ -90,7 +90,7 @@
                 </c:forEach>
                 <option value="other">Other</option>
             </select>
-            <input name="type" type="text" id="otherInput" style="display: none"/>
+            <input name="otherType" type="text" id="otherInput" style="display: none"/>
         </div>
         <div class="btn__container d-flex justify-content-center mt-3">
             <button type="submit" class="btn btn-primary">Save change</button>
@@ -108,9 +108,9 @@
         let otherInput = document.getElementById("otherInput");
 
         if (selectBox.value === "other") {
-            otherInput.style.display = "block"; // Hiển thị input text
+            otherInput.style.display = "block";
         } else {
-            otherInput.style.display = "none"; // Ẩn input text
+            otherInput.style.display = "none";
         }
     }
 </script>
