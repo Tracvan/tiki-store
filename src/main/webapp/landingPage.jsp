@@ -34,7 +34,7 @@
             <form class="d-flex" action="/webapp" method="get">
                 <input class="search__input form-control me-2" type="search" hidden
                        aria-label="Search" name="action" value="search">
-                <input class="search__input form-control me-2" type="text" placeholder="Search"
+                <input class="search__input form-control me-2" type="text" value="${searchQuery}"
                        name="searchQuery">
                 <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
@@ -66,11 +66,7 @@
                         </a>
                     </div>
                 </c:forEach>
-                <%--                <div class="catagory-item">--%>
-                <%--                    <a href="/webapp?action=headphone" class="catagory-item-name">--%>
-                <%--                        Head Phone--%>
-                <%--                    </a>--%>
-                <%--                </div>--%>
+
             </div>
             <div class="display-product col-10">
                 <div class="row">
