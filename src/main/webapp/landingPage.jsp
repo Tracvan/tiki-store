@@ -25,9 +25,12 @@
                     <a class="nav-link" href="/webapp">Product List</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+                    <a class="nav-link" href="/authin?action=signout">Sign Out</a>
                 </li>
             </ul>
+
+            <h3 class="position-relative" style="left: -300px">Welcome back, ${account.email.split("@")[0]}!</h3>
+
             <form class="d-flex" action="/webapp" method="get">
                 <input class="search__input form-control me-2" type="search" hidden
                        aria-label="Search" name="action" value="search">
@@ -85,6 +88,13 @@
                             </div>
                         </div>
                     </c:forEach>
+
+                    <div>
+                        <c:forEach var="i" begin="1" end="${endPage}">
+                            <a type="button" class="btn btn-outline-primary"
+                               href="/webapp?action=${action}&page=${i}&searchQuery=${searchQuery}">${i}</a>
+                        </c:forEach>
+                    </div>
                 </div>
             </div>
         </div>

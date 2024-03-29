@@ -63,9 +63,11 @@
         <div class="container-xs position-relative d-flex align-items-sm-center form-container">
             <form action="/authin?a=signin" method="post" id="sign-in">
                 <h1>Sign In</h1>
+                <h5 style="text-align: center; color: greenyellow">${signUpSuccess}</h5>
                 <div class="mb-3">
                     <label for="email" class="form-label">Email address</label>
-                    <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp">
+                    <input type="email" class="form-control" id="email" name="email" value="${email}">
+                    <p style="color: red">${signInAlert}</p>
                 </div>
                 <div class="mb-3">
                     <label for="password" class="form-label">Password</label>
@@ -79,7 +81,8 @@
                 <h1>Sign Up</h1>
                 <div class="mb-3">
                     <label for="emailsu" class="form-label">Email address</label>
-                    <input type="email" class="form-control" id="emailsu" aria-describedby="emailHelp" name="emailsu">
+                    <input type="email" class="form-control" id="emailsu" value="${emailsu}" name="emailsu">
+                    <p style="color: red">${signUpAlert}</p>
                 </div>
                 <div class="mb-3">
                     <label for="passwordsu" class="form-label">Password</label>
